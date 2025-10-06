@@ -44,6 +44,10 @@ inputs:
     description: "Fail if API changed but is backward compatible ('changed' value) or changes broke backward compatibility ('incompatible' value)"
     required: false
     default: ""
+  openapi-diff-version:
+    description: "Version of openapi-diff tool"
+    required: false
+    default: "2.0.1"
 
 outputs:
   state:
@@ -55,7 +59,7 @@ runs:
   steps:
     - name: "Run openapi-diff tool"
       run: |
-        docker run -v "$(pwd):/specs" --rm openapitools/openapi-diff:2.0.1 \
+        docker run -v "$(pwd):/specs" --rm openapitools/openapi-diff:${{inputs.openapi-diff-version}} \
           /specs/${{inputs.old-spec}} \
           /specs/${{inputs.new-spec}} \
           `if [[ ${{inputs.header}} != '' ]]; then --header ${{inputs.header}}; fi` \

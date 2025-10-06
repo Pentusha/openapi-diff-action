@@ -33,6 +33,7 @@ The following input variables options can/must be configured:
 |`text`|Optional|Export diff as text in given file. |`'.tmp/text'`|
 |`html`|Optional|Export diff as HTML in given file. |`'.tmp/html'`|
 |`fail-on`|Optional|Fail if API changed but is backward compatible (`changed` value) or changes broke backward compatibility (`incompatible` value). |`''`|
+|`openapi-diff-version`|Optional|Tag of `openapitools/openapi-diff` docker image. |`2.0.2`| 
 
 ## Outputs
 - `state`: Output diff state: `no_changes`, `incompatible`, `compatible`.
