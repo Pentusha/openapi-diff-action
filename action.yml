@@ -62,9 +62,9 @@ runs:
         docker run -v "$(pwd):/specs" --rm openapitools/openapi-diff:${{inputs.openapi-diff-version}} \
           /specs/${{inputs.old-spec}} \
           /specs/${{inputs.new-spec}} \
-          `if [[ ${{inputs.header}} != '' ]]; then --header ${{inputs.header}}; fi` \
-          `if [[ ${{inputs.query}} != '' ]]; then --query ${{inputs.query}}; fi` \
-          `if [[ ${{inputs.fail-on}} != '' ]]; then --fail-on-${{inputs.fail-on}}; fi` \
+          ${{inputs.header && format('--header {0}', inputs.header) || ''}} \
+          ${{inputs.query && format('--query {0}', inputs.query) || ''}} \
+          ${{inputs.fail-on && format('--fail-on-{0}', inputs.fail-on) || ''}} \
           --log ${{inputs.log}} \
           --markdown /specs/${{inputs.markdown}} \
           --json /specs/${{inputs.json}} \
